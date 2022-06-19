@@ -8,7 +8,7 @@ public:
     }
      void generateSubsets(vector<int>&nums,int ci,vector<int>&vec,vector<vector<int>>&ans)
      {
-             if(ci>nums.size()-1)
+             if(ci>=nums.size())
              {
                      ans.push_back(vec);
                      return;
