@@ -1,23 +1,17 @@
 class Solution {
 public:
-        unordered_map<int,int> mp;
     int fib(int n) {
-        return nthFibb(n,mp);
+            vector<int>dp(n+1,-1);
+            if(n<=1)
+            {
+                    return n;
+            }
+              dp[0]=0;
+             dp[1]=1;
+            for(int i=2;i<=n;i++)
+            {
+                    dp[i]=dp[i-2]+dp[i-1];
+            }
+            return dp[n];
     }
-        int nthFibb(int n,unordered_map<int,int>&mp)
-        {
-                if(n<=1)
-                {
-                        return n;
-                }
-                int currentKey=n;
-                if(mp.find(currentKey)!=mp.end())
-                {
-                        return mp[n];
-                }
-                mp[n]=nthFibb(n-1,mp)+nthFibb(n-2,mp);
-                
-                return mp[n];
-                
-        }
 };
