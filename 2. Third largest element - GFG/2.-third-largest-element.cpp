@@ -5,25 +5,28 @@ using namespace std;
  // } Driver Code Ends
 class Solution{
   public:
-    int thirdLargest(int a[], int n)
+    int thirdLargest(int arr[], int n)
     {
-         if(n<3)    return -1;
-         int l1=a[0],l2=0,l3=-1;
-         for(int i=1;i<n;i++){
-             if(a[i]>l1){
-                 l3=l2;
-                 l2=l1;
-                 l1=a[i];
+        if(n==2 || n==1 ) return -1;
+         
+         int first,second,third;
+         first=second=third=INT_MIN;
+         for(int i=0;i<n;i++){
+             if(arr[i]>first){
+                 third = second;
+                 second = first;
+                 first = arr[i];
+             } 
+             else if(arr[i]>second){
+                 third = second;
+                 second = arr[i];
              }
-             else if(a[i]>l2){
-                     l3=l2;
-                     l2=a[i];
-                 }
-             else if(a[i]>l3){
-                 l3=a[i];
+             else if(arr[i]>third){
+                 third = arr[i];
              }
          }
-         return l3;
+         
+         return third;
     }
 
 };
