@@ -9,27 +9,57 @@ using namespace std;
 // User function template for C++
 
 class Solution{
-   public:
-   void recur(vector<string>&ans,vector<vector<int>>&m,int n,int i,int j,string temp){
-       if(i==n-1&&j==n-1&&m[n-1][n-1]){
-           ans.push_back(temp);
-           return;
-       }
-       if(i<0||j<0||i>=n||j>=n||m[i][j]==0)return;
-       m[i][j]=0;
-       recur(ans,m,n,i+1,j,temp+'D');
-       recur(ans,m,n,i,j+1,temp+'R');
-       recur(ans,m,n,i-1,j,temp+'U');
-       recur(ans,m,n,i,j-1,temp+'L');
-       m[i][j]=1;
+    public:
+    vector<string> findPath(vector<vector<int>> &grid, int n) {
+        vector<string> paths;
+        string currentPath;
+        
+        GenerateAllPaths(grid, n, 0, 0, currentPath, paths);
+        
+        return paths;
+    }
+    
+    // Check currentPath Pass type
+    void GenerateAllPaths(vector<vector<int>> &grid, int &n, int currentRow, int currentCol, string &currentPath, vector<string> &paths) {
+        if(currentRow < 0 || currentRow >=n || currentCol < 0 || currentCol >=n) {
             return;
-   }
-   vector<string> findPath(vector<vector<int>> &m, int n) {
-     vector<string>ans;
-   
-     recur(ans,m,n,0,0,"");
-     return ans;
-   }
+        }
+        
+        if(grid[currentRow][currentCol] == 0) {
+            return;
+        }
+        
+        if(currentRow == n-1 && currentCol == n-1) {
+            paths.push_back(currentPath);
+            return;
+        }
+        
+        grid[currentRow][currentCol] = 0;
+        
+        // Down Movement
+        currentPath += "D";
+        GenerateAllPaths(grid, n, currentRow+1, currentCol, currentPath, paths);
+        currentPath.pop_back();
+        
+        // Left Movement
+        currentPath += "L";
+        GenerateAllPaths(grid, n, currentRow, currentCol-1, currentPath, paths);
+        currentPath.pop_back();
+        
+        // Right Movement
+        currentPath += "R";
+        GenerateAllPaths(grid, n, currentRow, currentCol+1, currentPath, paths);
+        currentPath.pop_back();
+        
+        // Up Movement
+        currentPath += "U";
+        GenerateAllPaths(grid, n, currentRow-1, currentCol, currentPath, paths);
+        currentPath.pop_back();
+        
+        grid[currentRow][currentCol] = 1;
+        
+        return;
+    }
 };
 
     
