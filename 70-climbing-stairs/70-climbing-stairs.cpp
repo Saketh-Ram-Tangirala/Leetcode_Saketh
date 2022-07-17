@@ -1,27 +1,14 @@
 class Solution {
 public:
     int climbStairs(int n) {
-            unordered_map<int,int> mp;
-      return nthStair(0,n,mp);   
+        vector<int> dp(n+2,-1);
+            dp[n+1]=0;
+            dp[n]=1;
+            for(int cs=n-1;cs>=0;cs--)
+            {
+                    dp[cs]=dp[cs+1]+dp[cs+2];
+                    
+            }
+            return dp[0];
     }
-        int nthStair(int cs,int ts,unordered_map<int,int>&mp)
-        {
-                if(cs==ts)
-                {
-                        return 1;
-                }
-                if(cs>ts)
-                {
-                        return 0;
-                }
-                int currentKey=cs;
-                if(mp.find(currentKey)!=mp.end())
-                {
-                        return mp[currentKey];
-                }
-                int a=nthStair(cs+1,ts,mp);
-                int b=nthStair(cs+2,ts,mp);
-                mp[cs]=a+b;
-                return mp[cs];
-        }
 };
