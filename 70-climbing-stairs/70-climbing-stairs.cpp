@@ -4,7 +4,7 @@ public:
         unordered_map<int,int> mp;
         return nthStairs(0,n,mp);
     }
-    int nthStairs(int ci,int n,unordered_map<int,int> &mp)
+    int nthStairs(int ci,int n,unordered_map<int,int>&mp)
     {
         if(ci==n)
         {
@@ -15,6 +15,7 @@ public:
             return 0;
         }
         int currentKey=ci;
+        
         if(mp.find(currentKey)!=mp.end())
         {
             return mp[currentKey];
@@ -22,6 +23,7 @@ public:
         int onestep=nthStairs(ci+1,n,mp);
         int twostep=nthStairs(ci+2,n,mp);
         mp[currentKey]=onestep+twostep;
-        return mp[currentKey];
+        return onestep+twostep;
+        
     }
 };
