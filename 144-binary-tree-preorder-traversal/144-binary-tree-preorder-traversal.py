@@ -1,33 +1,21 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    vector<int> preorderTraversal(TreeNode* root) {
-        vector<int> v;
-        preorderTraversal(root,v);
-        return v;
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        if root == None:
+            return 
+        results = []
+        def dfs(node):
+            results.append(node.val)
+            if node.left:
+                dfs(node.left)
+            if node.right:
+                dfs(node.right)
         
-    }
-    void preorderTraversal(TreeNode* root,vector<int>&v)
-    {
+        dfs(root)
+        return results
         
-        if(root==NULL)
-        {
-            return;
-        }
-        v.push_back(root->val);
-        preorderTraversal(root->left,v);
-        preorderTraversal(root->right,v);
-        
-        
-    }
-};
