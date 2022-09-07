@@ -16,8 +16,6 @@ public:
         {
             return 0;
         }
-        int leftans=1+maxDepth(root->left);
-        int rightans=1+maxDepth(root->right);
-        return max(leftans,rightans);
+        return 1+max(maxDepth(root->left),maxDepth(root->right));
     }
 };
