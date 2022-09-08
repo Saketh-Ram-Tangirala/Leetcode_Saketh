@@ -11,9 +11,9 @@
  */
 class Solution {
 public:
-    void rootToLeaf(TreeNode* root, string currentString,int* ans)
+    void roottoleaf(TreeNode* root, string currentString,int* ans)
     {
-        if(root->left== NULL && root->right==NULL)
+        if(root->left==NULL and root->right==NULL)
         {
             currentString+=to_string(root->val);
             ans[0]+=stoi(currentString,0,2);
@@ -21,15 +21,15 @@ public:
         }
         string curr=to_string(root->val);
         if(root->left!=NULL)
-            rootToLeaf(root->left,currentString+curr,ans);
+            roottoleaf(root->left,currentString+curr,ans);
         if(root->right!=NULL)
-            rootToLeaf(root->right,currentString+curr,ans);
+            roottoleaf(root->right,currentString+curr,ans);
         
     }
     int sumRootToLeaf(TreeNode* root) {
-        int* ans=new int[1];
+        int *ans=new int[1];
         ans[0]=0;
-        rootToLeaf(root,"",ans);
+        roottoleaf(root,"",ans);
         return ans[0];
     }
 };
