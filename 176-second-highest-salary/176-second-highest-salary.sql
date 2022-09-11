@@ -1,5 +1,3 @@
-/* Write your PL/SQL query statement below */
-SELECT
-
-MAX(salary) as SecondHighestSalary
-FROM employee where salary < (SELECT MAX(salary) FROM employee);
+# Write your MySQL query statement below
+Select Max(salary) as SecondHighestSalary From Employee 
+Where salary <> (Select Max(salary) From Employee);
