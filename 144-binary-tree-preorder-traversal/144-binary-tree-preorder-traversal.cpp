@@ -20,12 +20,10 @@ public:
     {
         if(root==NULL)
         {
-            return;
+            return ;
         }
         ans.push_back(root->val);
         preorder(root->left,ans);
         preorder(root->right,ans);
-        
-        
     }
 };
