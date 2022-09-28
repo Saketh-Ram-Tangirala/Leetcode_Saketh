@@ -12,26 +12,27 @@
 class Solution {
 public:
     TreeNode* increasingBST(TreeNode* root) {
-     vector<int> ans;
-            inorderTraversal(root,ans);
-            TreeNode* dummy=new TreeNode(-1);
-            TreeNode *newroot=dummy;
-            for(auto i:ans)
-            {
-               dummy->right=new TreeNode(i);
-                    dummy=dummy->right;
-            }
-            return newroot->right;
-            
-    }
-        void inorderTraversal(TreeNode* root,vector<int>&ans)
+        vector<int> ans;
+        inorderTraversal(root,ans);
+       TreeNode* dummyNode=new TreeNode(-1);
+        TreeNode*  newNode=dummyNode;
+        for(auto it:ans)
         {
-                if(root==NULL)
-                {
-                        return;
-                }
-                inorderTraversal(root->left,ans);
-                ans.push_back(root->val);
-                inorderTraversal(root->right,ans);
+            dummyNode->right=new TreeNode(it);
+            dummyNode=dummyNode->right;
         }
+        return newNode->right;
+        
+    }
+    void inorderTraversal(TreeNode* root,vector<int>&ans)
+    {
+        if(root==NULL)
+        {
+            return;
+        }
+        inorderTraversal(root->left,ans);
+        ans.push_back(root->val);
+        inorderTraversal(root->right,ans);
+        return;
+    }
 };
