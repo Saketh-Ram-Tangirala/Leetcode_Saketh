@@ -11,19 +11,28 @@
  */
 class Solution {
 public:
-    int rangeSumBST(TreeNode* root, int L, int R) {
-         sumofRange = 0;
-        dfs(root,L,R);
-        return sumofRange;
+    int rangeSumBST(TreeNode* root, int low, int high) {
+       if(root==NULL)return 0;
+    int sum =0;
+        queue<TreeNode*>q;
+        q.push(root);
+        while(!q.empty()){
+          TreeNode* node=q.front();
+            q.pop();
+            if(node->val<low)
+            {
+                if(node->right!=NULL)q.push(node->right);
+            }
+            else if(node->val >high && node->left!=NULL){
+                q.push(node->left);                
+            }
+            else if(node->val>=low && node->val <=high){
+                sum+=(node->val);
+                if(node->left!=NULL)q.push(node->left);
+                if(node->right!=NULL)q.push(node->right);
+            } 
+        }
+        return sum;
     }
-     int sumofRange;
-    void dfs(TreeNode* root, int L, int R){
-		//Base case
-        if(!root) return;
-		//If in range add 
-        if(root->val >= L && root->val <= R) sumofRange += root->val;
-        //Digging the depths of the tree
-		if(root->val > L) dfs(root->left,L,R);
-        if(root->val < R) dfs(root->right,L,R);
-    }
+    
 };
