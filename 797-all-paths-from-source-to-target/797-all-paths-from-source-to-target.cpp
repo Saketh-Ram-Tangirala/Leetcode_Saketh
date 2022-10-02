@@ -6,7 +6,7 @@ public:
         vector<bool> vis(n);
         
         vector<int> vec;
-        vector<int> currpath;
+        
         vec.push_back(0);
         findAllpaths(graph,0,vis,n,vec,answer);
         
