@@ -1,34 +1,38 @@
 class Solution {
 public:
     vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
-        vector<vector<int>> ans;
-            vector<int> v;
-            int n=graph.size();
-            vector<bool> visited(n);
-            SourceToTarget(graph,0,n,visited,v,ans);
-            return ans;
-    }
-     void SourceToTarget(vector<vector<int>>&graph,int ci,int n,vector<bool>&visited,vector<int>&v,vector<vector<int>>&ans)
-        {
-               if(ci==n-1)
-               {
-                       v.push_back(ci);
-                       ans.push_back(v);
-                       v.pop_back();
-                       return;
-               }
-                if(visited[ci]==true)
-                {
-                        return;
-                }
-                visited[ci]=true;
-                v.push_back(ci);
-                for(auto neighbour:graph[ci])
-                {
-                        SourceToTarget(graph,neighbour,n,visited,v,ans);
-                }
-                visited[ci]=false;
-                v.pop_back();
-                return;
+        vector<vector<int>> answer;
+        int n=graph.size();
+        vector<bool> vis(n);
+        
+        vector<int> vec;
+        vector<int> currpath;
+        vec.push_back(0);
+        findAllpaths(graph,0,vis,n,vec,answer);
+        
+        return answer;
+        
         }
+    void findAllpaths(vector<vector<int>>& graph,int curr,vector<bool>&vis,int n,vector<int>&vec,vector<vector<int>>&answer)
+    {
+        if(curr==n-1)
+        {
+            answer.push_back(vec);
+            return;
+        }
+        if(vis[curr]==true)
+        {
+            return;
+        }
+        vis[curr]=true;
+        for(auto neighbour:graph[curr])
+        {
+            vec.push_back(neighbour);
+            findAllpaths(graph,neighbour,vis,n,vec,answer);
+            vec.pop_back();
+            
+        }
+        vis[curr]=false;
+        return;
+    }
 };
