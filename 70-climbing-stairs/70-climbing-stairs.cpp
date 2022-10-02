@@ -1,19 +1,17 @@
 class Solution {
 public:
     int climbStairs(int n) {
-        vector<int> dp(n+1,-1);
-        return findways(n,dp);
-    }
-    int findways(int n,vector<int>&dp)
-    {
         if(n<=1)
         {
             return 1;
         }
-        if(dp[n]!=-1)
+        vector<int> dp(n+1,-1);
+        dp[0]=1;
+        dp[1]=1;
+        for(int i=2;i<=n;i++)
         {
-            return dp[n];
+            dp[i]=dp[i-1]+dp[i-2];
         }
-        return dp[n]=findways(n-1,dp)+findways(n-2,dp);
+        return dp[n];
     }
 };
